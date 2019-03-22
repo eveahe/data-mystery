@@ -1,0 +1,84 @@
+/* CSS files add styling rules to your content */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Benton Sans', 'Helvetica Neue', helvetica, arial, sans-serif;
+  margin: 2em;
+  height: 90%;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+p {
+  max-width: 600px;
+}
+
+input {
+  background-color: cyan;
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 3px;
+  font-size: 16px;
+  overflow: auto;
+}
+
+button {
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  box-shadow: 2px 2px teal;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+/* #select-mode{
+  background-color: pink
+} */
+
+select {
+  margin: 5px 0;
+}
+
+button:hover {
+  background-color: yellow;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+#json-output {
+  background: black;
+  color: white;
+  padding: 1em;
+}
+
+
+.left {
+  flex: 3 0 0;
+  margin-right: 2em;
+  overflow-y: scroll;
+}
+
+.right {
+  flex: 1 0 0;
+}
+
+@media (min-width: 768px) {
+  .row {
+    display: flex;
+    width: 75%;
+    height: 75%;
+  }
+}
