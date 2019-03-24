@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  font-family: 'Benton Sans', 'Helvetica Neue', helvetica, arial, sans-serif;
+  font-family: monospace;
   margin: 2em;
   height: 90%;
 }
@@ -22,6 +22,7 @@ p {
 
 input {
   background-color: cyan;
+  font-family: monospace;
   display: block;
   margin-bottom: 10px;
   padding: 5px;
@@ -32,19 +33,29 @@ input {
   overflow: auto;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid yellow;
+  box-shadow: 0px -4px 0px yellow inset;
+}
+
+a:hover{
+  background-color: yellow;
+}
+
 button {
   font-size: 16px;
   border-radius: 3px;
+  font-family: monospace;
   background-color: lightgrey;
   border: 1px solid grey;
   box-shadow: 2px 2px teal;
   cursor: pointer;
   margin: 5px 0;
+  width: 100%
 }
 
-/* #select-mode{
-  background-color: pink
-} */
 
 select {
   margin: 5px 0;
@@ -62,6 +73,37 @@ button:active {
   background: black;
   color: white;
   padding: 1em;
+}
+
+#state-mode {
+  background-color: rgba(132,136,255, 0.5);
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 3px;
+  font-size: 16px;
+  overflow: auto;
+}
+
+#select-mode{
+  background-color: rgba(211,211,211, 0.4);
+}
+
+#select-mode:hover{
+  background-color: yellow;
+}
+
+#select-field{
+  background-color: #545454;
+  color: white;
+  font-size: 35px
+}
+
+#select-field:hover{
+  background-color: yellow;
+  color: black;
 }
 
 

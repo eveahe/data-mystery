@@ -9,8 +9,9 @@ let json; // will hold the parsed JSON
 let output = document.getElementById("json-output"); // for easy access to this element
 let fieldjson; // **ADDED BY EVE** This is my crazy idea on making a json file with one element for each field name in the column list...
 let selectedField
-let mode = 'easy';
-let  selectModeButton; 
+let mode = 'hard';
+let selectModeButton; 
+let stateModeBox;
 
 //NOTE TO EVE, can use json.length to get number of rows, then json.columns to get the number of columns. 
 //Then use number of columns to first select a column. 
@@ -36,7 +37,7 @@ function loadFile(event) {
     
     // **ADDED BY EVE, keeping the data a ~mystery~
     // printToOutput(JSON.stringify(json, null, 4));
-    printToOutput("Success! We're preparing your data mystery.")
+    printToOutput("Success! We've preparing your data mystery. Click ~Mystery Data~ to start.")
     addButtons();
   };
   // reader reads the text of the file, triggering the "onload" function
@@ -51,6 +52,24 @@ function addButtons() {
   let operationsCol = document.getElementById("operations");
   // this avoids adding a new set of buttons for every new file chosen
   // only make 'count-rows' if it doesn't exist yet
+    //**Added by eve! :) This box tells the user what "mode" they're in.
+  if (!document.getElementById("state-mode")){
+    stateModeBox = document.createElement("div");
+    stateModeBox.setAttribute("id", "state-mode");
+    stateModeBox.innerHTML = "Current Mode: " + mode;
+    operationsCol.appendChild(stateModeBox);
+  }
+  if(!document.getElementById("select-mode")){
+     selectModeButton = document.createElement("button");
+    selectModeButton.setAttribute("id", "select-mode");
+    if(mode !== "hard"){
+    selectModeButton.innerHTML = "Switch to HARD MODE";
+    } else {
+    selectModeButton.innerHTML = "Switch to easy mode";
+    }
+    operationsCol.appendChild(selectModeButton);
+    selectModeButton.addEventListener("click", selectMode);
+  }
   if (!document.getElementById("count-rows")) {
     // add the "count rows" button and event listener
     let countRowsButton = document.createElement("button");
@@ -87,17 +106,6 @@ function addButtons() {
   // let sortByDropdown = updateSortBy();
   // operationsCol.appendChild(sortByDropdown);
   // sortByDropdown.addEventListener("change", sortBy);
-  if(!document.getElementById("select-mode")){
-     selectModeButton = document.createElement("button");
-    selectModeButton.setAttribute("id", "select-mode");
-    if(mode !== "hard"){
-    selectModeButton.innerHTML = "No sweat? Switch to HARD MODE";
-    } else {
-    selectModeButton.innerHTML = "Need a hint! Switch to easy mode";
-    }
-    operationsCol.appendChild(selectModeButton);
-    selectModeButton.addEventListener("click", selectMode);
-  }
 }
 
 // make a dropdown element with correct fields
@@ -208,14 +216,19 @@ How about a hint? OK: ${selectedItem}`);
 
 //Changing the mode for those who can't take the data mysteries. 
 function selectMode(){
+  var b = document.body; 
   if(mode !== "easy"){
-    mode = "easy"
-    selectModeButton.innerHTML = "No sweat? Switch to HARD MODE";
+    mode = "easy";
+    b.setAttribute("style", "background-color: rgb(0,255,0, 0.6)");
+    stateModeBox.innerHTML = "Current Mode: " + mode;
+    selectModeButton.innerHTML = "Switch to HARD MODE";
   } else {
-    mode = "hard"
-    selectModeButton.innerHTML = "Phew! Switch to easy mode";
+    mode = "hard";
+    b.setAttribute("style", "background-color: rgb(255, 0, 0, 0.6)");
+    stateModeBox.innerHTML = "Current Mode: " + mode;
+    selectModeButton.innerHTML = "Switch to easy mode";
+  
   }
-  console.log(mode);
 }
 document.getElementById("input").addEventListener("change", loadFile);
 
