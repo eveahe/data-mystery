@@ -9,9 +9,11 @@ let json; // will hold the parsed JSON
 let output = document.getElementById("json-output"); // for easy access to this element
 let fieldjson; // **ADDED BY EVE** This is my crazy idea on making a json file with one element for each field name in the column list...
 let selectedField
-let mode = 'hard';
+let mode = 'easy';
 let selectModeButton; 
 let stateModeBox;
+let getHintButton;
+let hinted = 1
 
 //NOTE TO EVE, can use json.length to get number of rows, then json.columns to get the number of columns. 
 //Then use number of columns to first select a column. 
@@ -37,7 +39,7 @@ function loadFile(event) {
     
     // **ADDED BY EVE, keeping the data a ~mystery~
     // printToOutput(JSON.stringify(json, null, 4));
-    printToOutput("Success! We've preparing your data mystery. Click ~Mystery Data~ to start.")
+    printToOutput("Success! We've prepared your data mystery. <br><br>Click ~Mystery Data~ to start.")
     addButtons();
   };
   // reader reads the text of the file, triggering the "onload" function
@@ -60,41 +62,27 @@ function addButtons() {
     operationsCol.appendChild(stateModeBox);
   }
   if(!document.getElementById("select-mode")){
-     selectModeButton = document.createElement("button");
+    selectModeButton = document.createElement("button");
     selectModeButton.setAttribute("id", "select-mode");
     if(mode !== "hard"){
     selectModeButton.innerHTML = "Switch to HARD MODE";
     } else {
     selectModeButton.innerHTML = "Switch to easy mode";
     }
-    operationsCol.appendChild(selectModeButton);
+    stateModeBox.appendChild(selectModeButton);
     selectModeButton.addEventListener("click", selectMode);
   }
-  if (!document.getElementById("count-rows")) {
-    // add the "count rows" button and event listener
-    let countRowsButton = document.createElement("button");
-    countRowsButton.setAttribute("id", "count-rows");
-    countRowsButton.innerHTML = "Count rows";
-    operationsCol.appendChild(countRowsButton);
-    countRowsButton.addEventListener("click", countRows);
-  }
-  // only make 'get-fields' if it doesn't exist yet
-  // if (!document.getElementById("get-fields")) {
-  //   // add the "get fields" button and event listener
-  //   let getFieldsButton = document.createElement("button");
-  //   getFieldsButton.setAttribute("id", "get-fields");
-  //   getFieldsButton.innerHTML = "Get fields";
-  //   operationsCol.appendChild(getFieldsButton);
-  //   getFieldsButton.addEventListener("click", getFields);
-  // }
-  // //**Added by EVE :) ** This part creates the "Make data dictionary skeleton button."
-  // if (!document.getElementById("make-dictionary")){
-  //   let makeDictionaryButton = document.createElement("button");
-  //   makeDictionaryButton.setAttribute("id", "make-dictionary");
-  //   makeDictionaryButton.innerHTML = "Make Data Dictionary";
-  //   operationsCol.appendChild(makeDictionaryButton);
-  //   makeDictionaryButton.addEventListener("click", makeDictionary);
-  // }
+  
+  if(!document.getElementById("get-hint")){
+    getHintButton = document.createElement("button");
+    getHintButton.setAttribute("id", "select-mode");
+    getHintButton.innerHTML = "Hint"
+    if(mode !== "easy"){
+      stateModeBox.appendChild(getHintButton);
+      getHintButton.addEventListener("click", getHint);
+    }
+     }
+
   if(!document.getElementById("select-field")){
     let selectFieldButton = document.createElement("button");
     selectFieldButton.setAttribute("id", "select-field");
@@ -102,10 +90,6 @@ function addButtons() {
     operationsCol.appendChild(selectFieldButton);
     selectFieldButton.addEventListener("click", selectField);
   }
-  // // add the "sort by" drop down
-  // let sortByDropdown = updateSortBy();
-  // operationsCol.appendChild(sortByDropdown);
-  // sortByDropdown.addEventListener("change", sortBy);
 }
 
 // make a dropdown element with correct fields
@@ -119,6 +103,7 @@ function updateSortBy(operationsCol) {
   }
   sortByDropdown = document.createElement("select");
   sortByDropdown.setAttribute("id", "sort-by");
+  
   // fancy built-in way to add options to a dropdown
   sortByDropdown.options[sortByDropdown.options.length] = new Option(
     "Sort by...",
@@ -137,7 +122,7 @@ function updateSortBy(operationsCol) {
 
 // adds the new output to the "output"
 function printToOutput(text) {
-  output.innerHTML = "<pre>" + text + "<br><br><br></pre>";
+  output.innerHTML = "<pre>" + text + "<br><br></pre>";
 }
 
 // counts the rows in the input CSV
@@ -193,11 +178,11 @@ function makeDictionary(){
 function selectField(){
   let numFields = json.columns.length
   selectedField = json.columns[Math.floor(Math.random() * (numFields))];
+  hinted = 0 
   printToOutput("Now tell me, what does " + selectedField + " mean?");
-  // console.log(selectedField);
-  // console.log(json[0][selectedField]);
   if(mode !== "hard"){
-    selectRow();
+    // selectRow();
+    getHint()  
     } 
   return selectedField;
 }
@@ -213,6 +198,17 @@ function selectRow(){
 How about a hint? OK: ${selectedItem}`);
 }
 
+function getHint(){
+  let numRows = json.length;
+  let selectedRow = [Math.floor(Math.random() * (numRows) + 1)];
+  let selectedItem = json[selectedRow][selectedField];
+  let hint = `HINT, think:<br>${selectedItem}`  
+  if(hinted !== 1){
+    output.innerHTML += hint;
+  }
+  hinted = 1
+}
+
 
 //Changing the mode for those who can't take the data mysteries. 
 function selectMode(){
@@ -222,12 +218,15 @@ function selectMode(){
     b.setAttribute("style", "background-color: rgb(0,255,0, 0.6)");
     stateModeBox.innerHTML = "Current Mode: " + mode;
     selectModeButton.innerHTML = "Switch to HARD MODE";
+    stateModeBox.appendChild(selectModeButton);
   } else {
     mode = "hard";
     b.setAttribute("style", "background-color: rgb(255, 0, 0, 0.6)");
     stateModeBox.innerHTML = "Current Mode: " + mode;
     selectModeButton.innerHTML = "Switch to easy mode";
-  
+    stateModeBox.appendChild(selectModeButton);
+    stateModeBox.appendChild(getHintButton);
+    getHintButton.addEventListener("click", getHint);
   }
 }
 document.getElementById("input").addEventListener("change", loadFile);
