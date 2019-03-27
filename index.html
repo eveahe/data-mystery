@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>d3-dsv Starter App</title>
+    <title>~Mystery Data~</title>
+    <meta name="description" content="How well do you know your data?">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+   <link id="favicon" rel="icon" href="https://cdn.glitch.com/e5bb7ae5-802d-4440-ade0-4978cdf7d045%2FScreen%20Shot%202019-03-25%20at%2010.25.59%20PM.png?1553549172677" type="image/x-icon">
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
     <!-- import d3-dsv -->
@@ -20,7 +21,7 @@
       How well do you know your data? Test yourself, your friends or your colleagues. <b>Upload a csv to start!</b> Ideally choose one with more than a couple of fields and roll the dice to see if you can define what the field means.
     </p>
     <p>
-      See if you can solve five mysteries and if at least 3 have you stumped, consider creating documentation or a <a href="https://caitlinhudon.com/2018/10/30/data-dictionaries/">data dictionary</a> on where the data comes from and what it represents! Don't let data be misunderstood. 
+      Try five mysteries! If at least 3 have you stumped, consider creating documentation or a <a href="https://caitlinhudon.com/2018/10/30/data-dictionaries/">data dictionary</a> on where the data comes from and what it represents! Don't let data be misunderstood. 
     </p>
     <div class="row">
       <div id="json-output" class="left"></div>
@@ -28,7 +29,15 @@
         <input type="file" id="input">
       </div>
     </div>
-
+    <footer>
+      Some notes about the data mystery game above.
+      <ol>
+        <li>This game was inspired by <a href="https://twitter.com/thejunglejane/status/1107836327100338177">this tweet</a> by <a href="https://twitter.com/thejunglejane">@thejunglejane</a> and was remixed from Glitch's <a href="https://starter-d3-dsv.glitch.me/">d3 CSV parse challenge app.</a></li>
+        <li>Any CSV you upload is processed on the client side only (aka is not saved). This means that you can't share a link with a friend _after_ you've uploaded, but wouldn't it be more fun to play together anyway? But for real, this is mostly so I didn't need to worry about any file security issuess.</li>
+        <li>After about ~8 years of working in data companies or on data-related teams, I both 1) distrust all data and 2) believe in documentation, even if it's just for you.</li>
+        <li>Made by <a href="https://twitter.com/eveahe">@eveahe</a>, all suggestions for improvement welcome! You can remix 4 your own data game.</li>
+      </ol>
+    </footer>
 
     <!-- include the Glitch button to show what the webpage is about and
           to make it easier for folks to view source and remix -->
