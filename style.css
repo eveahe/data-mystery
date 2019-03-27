@@ -18,7 +18,7 @@ h1 {
 }
 
 p {
-  max-width: 600px;
+  margin-right: 50px;
 }
 
 input {
@@ -34,6 +34,7 @@ input {
   overflow: auto;
 }
 
+/*Getting the links to look cool, but also still like links.*/
 a {
   text-decoration: none;
   color: black;
@@ -57,6 +58,13 @@ button {
   width: 100%
 }
 
+footer {
+  margin-top: 25px;
+  margin-right: 50px;
+  padding-top: 25px;
+  border-top: 1px solid #d3d3d3
+}
+
 
 select {
   margin: 5px 0;
@@ -68,6 +76,14 @@ button:hover {
 
 button:active {
   box-shadow: none;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 #json-output {
@@ -96,30 +112,30 @@ button:active {
   background-color: yellow;
 }
 
+/*Making the mystery data button bigger so it is obvious how to start playing*/
 #select-field{
-  background-color: #545454;
-  color: white;
   font-size: 35px
 }
 
-#select-field:hover{
-  background-color: yellow;
-  color: black;
-}
-
+/*We also want the output here to be super readable*/
 #json-output{
   font-size: 1.3em;
 }
 
 
+/*Adding a 10px margin to both the left and right, so there is space between them on narrow screens.*/
 .left {
   flex: 3 0 0;
-  margin-right: 2em;
+  margin-right: 2em; 
+  margin-top: 10px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .right {
   flex: 1 0 0;
+  margin-top: 10px;
+
 }
 
 @media (min-width: 768px) {
